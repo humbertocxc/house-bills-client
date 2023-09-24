@@ -1,7 +1,7 @@
-import Header from '@/components/Header'
-import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+import Header from '@/components/Header'
+import './globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -18,7 +18,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Header />
+        <div className="absolute top-0 right-0 w-screen h-4/6 bg-gradient-to-b from-bgInit/40 to-white -z-50 filter opacity-50" />
         {children}
       </body>
     </html>

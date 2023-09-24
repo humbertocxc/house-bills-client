@@ -10,6 +10,9 @@ const config: Config = {
     extend: {
       fontFamily: {
         garamond: 'EB Garamond, serif',
+      },
+      colors: {
+        bgInit: '#55423d',
       }
     },
   },
