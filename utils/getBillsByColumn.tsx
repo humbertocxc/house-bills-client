@@ -1,8 +1,16 @@
 export const getBillsByColumn = () => {
-  const data = JSON.parse(localStorage.getItem('bills') || '')
-  const oldBills = data.documents
+  type IBills = Bill[]
+  let oldBills: IBills
 
-  const columns = oldBills.reduce((acc: Bill, bill: Bill) => {
+  try {
+    const data = localStorage.getItem('bills')
+    const parsedData = JSON.parse(data || '')
+    oldBills = parsedData.documents
+  } catch {
+    oldBills = []
+  }
+
+  const columns = oldBills.reduce<Map<TypedColumn, Column>>((acc, bill) => {
     if(!acc.get(bill.status)) {
       acc.set(bill.status, {
         id: bill.status,
@@ -12,7 +20,7 @@ export const getBillsByColumn = () => {
 
     acc.get(bill.status)!.bills.push({
       $id: bill.$id,
-      purchaseDate: bill.$purchaseDate,
+      $purchaseDate: bill.$purchaseDate,
       dueDate: bill.dueDate,
       status: bill.status,
       title: bill.title,
@@ -24,7 +32,7 @@ export const getBillsByColumn = () => {
     })
 
     return acc
-  }, new Map<TypedColumn, Column>())
+  }, new Map<TypedColumn, Column>)
 
   const columnTypes: TypedColumn[] = ["fixed", "paid", "variable"]
 
