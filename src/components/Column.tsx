@@ -30,7 +30,7 @@ export default function Column({ id, bills, index }: IColumn) {
               <div
                 {...provided.droppableProps}
                 ref={provided.innerRef}
-                className={`p-2 rounded-2xl shadow-lg ${
+                className={`p-2 rounded-2xl shadow-2xl ${
                   snapshot.isDraggingOver ? "bg-amber-600/70" : "bg-white/50"
                 }`}
               >

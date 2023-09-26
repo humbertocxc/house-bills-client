@@ -19,7 +19,7 @@ export default function Card({ bill, id, index, innerRef, dragHandleProps, dragg
       ref={innerRef}
     >
       <div className="flex justify-between items-center p-2">
-        <p>{bill.title}</p>
+        <p>{bill.$id}</p>
         <button className="text-red-600/90 hover:text-red-600">
           <XCircleIcon className="ml-5 h-8 w-8" />
         </button>
