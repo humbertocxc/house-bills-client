@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { DragDropContext, DropResult, Droppable } from "@hello-pangea/dnd";
 import Column from "./Column";
 import useWindowSize from "@/hooks/useWindowSize";
+import useRearrangeColumns from "@/hooks/useRearrangeColumns";
 
 export default function Board() {
   const [board, getBoard, setBoardState] = useBoardStore(
@@ -11,15 +12,6 @@ export default function Board() {
   )
 
   const isMobile = useWindowSize();
-
-  const rearrangeColumns = ({ destination, source }: DropResult) => {
-    const entries = Array.from(board.columns.entries())
-    const [removed] = entries.splice(source.index, 1)
-    entries.splice(destination!.index, 0, removed)
-
-    const rearrangedColumns = new Map(entries)
-    setBoardState({ ...board, columns: rearrangedColumns })
-  }
 
   const rearrangeCards = ({ source, destination }: DropResult) => {
     const columns = Array.from(board.columns)
@@ -54,8 +46,10 @@ export default function Board() {
 
     if (!destination) return
     if (source.index === destination.index && source.droppableId === destination.droppableId) return
+
     if (type === 'column') {
-      rearrangeColumns(result)
+      const newBoard = useRearrangeColumns({ board, result })
+      setBoardState(newBoard)
       return
     }
 
@@ -71,7 +65,7 @@ export default function Board() {
       <Droppable droppableId="board" direction={isMobile ? 'vertical' : 'horizontal'} type="column">
         {(provided) => (
           <div
-            className="grid grid-cols-1 md:grid-cols-3 gap-5 max-w-7xl mx-auto pb-20"
+            className="grid grid-cols-1 md:grid-cols-3 gap-5 max-w-7xl mx-auto pb-20 px-4 md:px-0"
             {...provided.droppableProps}
             ref={provided.innerRef}
           >
