@@ -8,7 +8,10 @@ const BillSchema = Yup.object().shape({
   description: Yup.string()
     .max(100, 'Tamanho máximo excedido!')
     .nullable(),
-  totalValue: Yup.number().required('Campo obrigatório!'),
+  totalValue: Yup
+    .string()
+    .transform((value) => value.replace(/[^0-9]/g, ''))
+    .required('Campo obrigatório!'),
   totalInstallments: Yup.number().nullable().default(1),
 })
 

@@ -13,7 +13,7 @@ const config: Config = {
       },
       colors: {
         bgInit: '#55423d',
-        bgModal: '#ffddb9',
+        bgModal: '#f5edcd',
       }
     },
   },
