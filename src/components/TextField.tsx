@@ -9,7 +9,7 @@ export default function TextField({ error, label, ...rest }: ITextField) {
   return (
     <div className="flex flex-col justify-end pr-1">
       <p className="text-sm">{label}</p>
-      <Field {...rest} className="rounded-lg p-1 outline-none" />
+      <Field {...rest} className="rounded-lg p-1 outline-none shadow-sm hover:shadow-md focus:shadow-md" />
       {error ? (<span className="text-red-500 text-xs font-semibold">{String(error)}</span>) : null}
     </div>
   )

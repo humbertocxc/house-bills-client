@@ -2,7 +2,7 @@ interface Board {
   columns: Map<TypedColumn, Column>
 }
 
-type TypedColumn = 'paid' | 'fixed' | 'variable' | string
+type TypedColumn = 'paid' | 'fixed' | 'variable'
 
 interface Column {
   id: TypedColumn,

@@ -7,7 +7,7 @@ import { createBill } from "../../../utils/createBill";
 import { useBoardStore } from "@/app/store";
 
 interface INewBill {
-  columnId: string,
+  columnId: TypedColumn,
   hide: () => void,
 }
 
@@ -43,7 +43,7 @@ export default function NewBillForm({ columnId, hide }: INewBill) {
             <TextField label="Prazo de pagamento" error={errors.dueDate} name="dueDate" type="date" />
             <TextField label="Valor total" error={errors.totalValue} name="totalValue" type="number" />
             <TextField label="Número de parcelas" error={errors.totalInstallments} name="totalInstallments" type="number" />
-            <button className="bg-amber-900/50 hover:bg-amber-900/60 rounded-lg p-2 w-full" type="submit">Adicionar Conta</button>
+            <button className="bg-amber-900/50 hover:bg-amber-900/70 rounded-lg p-2 w-full" type="submit">Adicionar Conta</button>
           </Form>
         )}
       </Formik>

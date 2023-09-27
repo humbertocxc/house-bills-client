@@ -14,8 +14,8 @@ interface IColumn {
 const idToColumnText: {
   [key in TypedColumn]: string
 } = {
-  variable: "Contas de Emergência",
-  fixed: "Contas Fixas",
+  variable: "Despesas Eventuais",
+  fixed: "Despesas Fixas",
   paid: "Contas Pagas",
 }
 
