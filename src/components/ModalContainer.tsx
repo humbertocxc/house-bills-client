@@ -13,7 +13,7 @@ export default function ModalContainer({ children, hide, isOpen, modalTitle }: I
   return (
     <Dialog open={isOpen} onClose={hide}>
       <div className="fixed inset-0 flex w-screen h-screen bg-black/60 items-center justify-center">
-        <Dialog.Panel className="w-full max-w-md p-6 rounded-xl bg-orange-200">
+        <Dialog.Panel className="w-full max-w-md p-6 rounded-xl bg-bgModal">
           <div className="flex justify-between">
             <Dialog.Title>{modalTitle}</Dialog.Title>
             <button type="button" className="float-right outline-none" onClick={hide}>

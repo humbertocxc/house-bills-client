@@ -3,6 +3,7 @@ import { PlusCircleIcon } from "@heroicons/react/24/solid"
 import { useState } from "react"
 import Card from "./Card"
 import NewBillForm from "./NewBill"
+import ModalContainer from "./ModalContainer"
 
 interface IColumn {
   id: TypedColumn,
@@ -59,8 +60,6 @@ export default function Column({ id, bills, index }: IColumn) {
                       {(provided) => (
                         <Card
                           bill={bill}
-                          index={index}
-                          id={id}
                           innerRef={provided.innerRef}
                           draggableProps={provided.draggableProps}
                           dragHandleProps={provided.dragHandleProps}
@@ -69,22 +68,20 @@ export default function Column({ id, bills, index }: IColumn) {
                     </Draggable>
                   ))}
 
-                  {provided.placeholder}
+                  <div className="flex items-end justify-end p-2">
+                    <button className="text-amber-800/80 hover:text-amber-800">
+                      <PlusCircleIcon className="h-10 w-10" onClick={handleToggleModal} />
+                    </button>
+                  </div>
 
-                  {showModal
-                    ? <NewBillForm columnId={id} hide={handleToggleModal} />
-                    : (
-                      <div className="flex items-end justify-end p-2">
-                        <button className="text-amber-800/80 hover:text-amber-800">
-                          <PlusCircleIcon className="h-10 w-10" onClick={handleToggleModal} />
-                        </button>
-                      </div>
-                    )
-                  }
+                  {provided.placeholder}
                 </div>
               </div>
             )}
           </Droppable>
+          <ModalContainer modalTitle="Adicionar Conta" hide={handleToggleModal} isOpen={showModal}>
+            <NewBillForm columnId={id} hide={handleToggleModal} />
+          </ModalContainer>
         </div>
       )}
       </Draggable>
