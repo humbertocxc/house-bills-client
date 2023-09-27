@@ -40,9 +40,11 @@ export default function Column({ id, bills, index }: IColumn) {
               >
                 <h2 className="flex justify-between font-semibold text-lg p-2">
                   {idToColumnText[id]}
-                  <span className="text-gray-500 bg-gray-200 rounded-full px-2 py-1 text-sm font-normal">
-                    {bills.length}
-                  </span>
+                  <div className="bg-amber-900/10 rounded-full w-fit h-fit">
+                    <span className="flex justify-center items-center text-black/50 text-xs h-6 w-6">
+                      {bills.length}
+                    </span>
+                  </div>
                 </h2>
 
                 <div className="space-y-2">
