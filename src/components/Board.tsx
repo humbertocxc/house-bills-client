@@ -5,41 +5,13 @@ import { DragDropContext, DropResult, Droppable } from "@hello-pangea/dnd";
 import Column from "./Column";
 import useWindowSize from "@/hooks/useWindowSize";
 import useRearrangeColumns from "@/hooks/useRearrangeColumns";
+import useRearrangeCards from "@/hooks/useRearrangeCards";
 
 export default function Board() {
+  const isMobile = useWindowSize()
   const [board, getBoard, setBoardState] = useBoardStore(
     (state) => [state.board, state.getBoard, state.setBoardState]
   )
-
-  const isMobile = useWindowSize();
-
-  const rearrangeCards = ({ source, destination }: DropResult) => {
-    const columns = Array.from(board.columns)
-    const startColId = columns[Number(source.droppableId)]
-    const endColId = columns[Number(destination!.droppableId)]
-    const startCol: Column = { id: startColId[0], bills: startColId[1].bills }
-    const endCol: Column = { id: endColId[0], bills: endColId[1].bills }
-
-    const newBills = startCol.bills
-    const [billMoved] = newBills.splice(source.index, 1)
-
-    const newCol: Column = { id: startCol.id, bills: newBills }
-    const newColumns = new Map(board.columns)
-
-    if (startCol.id === endCol.id) {
-      newBills.splice(destination!.index, 0, billMoved)
-      newColumns.set(startCol.id, newCol)
-      setBoardState({ ...board, columns: newColumns })
-      return
-    }
-
-    const endBills = Array.from(endCol.bills)
-    endBills.splice(destination!.index, 0, billMoved)
-    newColumns.set(startCol.id, newCol)
-    newColumns.set(endCol.id, { id: endCol.id, bills: endBills })
-
-    setBoardState({ ...board, columns: newColumns })
-  }
 
   const handleDragEnd = (result: DropResult) => {
     const { destination, source, type } = result
@@ -53,7 +25,8 @@ export default function Board() {
       return
     }
 
-    rearrangeCards(result)
+    const newBoard = useRearrangeCards({ board, result })
+    setBoardState(newBoard)
   }
 
   useEffect(() => {

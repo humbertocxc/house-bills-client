@@ -1,4 +1,3 @@
-import { useBoardStore } from '@/app/store'
 import { DropResult } from '@hello-pangea/dnd'
 
 interface IProps {

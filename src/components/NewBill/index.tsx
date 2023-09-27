@@ -38,7 +38,7 @@ export default function NewBillForm({ columnId, hide }: INewBill) {
       >
         {({ errors }) => (
           <Form className="space-y-2 py-2">
-            <TextField label="Título da conta" error={errors.title} name="title" type="text" />
+            <TextField autoFocus label="Título da conta" error={errors.title} name="title" type="text" />
             <TextField label="Descrição da conta" error={errors.description} name="description" type="text" />
             <TextField label="Prazo de pagamento" error={errors.dueDate} name="dueDate" type="date" />
             <TextField label="Valor total" error={errors.totalValue} name="totalValue" type="number" />
