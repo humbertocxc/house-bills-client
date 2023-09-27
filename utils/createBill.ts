@@ -9,8 +9,6 @@ export function createBill(bill: Bill) {
     bills = []
   }
 
-  console.log(bills, bill)
-
   bills.push(bill)
 
   localStorage.setItem('bills', JSON.stringify({ document: bills }))

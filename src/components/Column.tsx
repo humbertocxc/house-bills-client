@@ -61,13 +61,13 @@ export default function Column({ id, bills, index }: IColumn) {
                     </Draggable>
                   ))}
 
+                  {provided.placeholder}
+
                   <div className="flex items-end justify-end p-2">
                     <button className="text-amber-800/80 hover:text-amber-800">
                       <PlusCircleIcon className="h-10 w-10" onClick={handleToggleModal} />
                     </button>
                   </div>
-
-                  {provided.placeholder}
                 </div>
               </div>
             )}
