@@ -9,15 +9,18 @@ interface Column {
   bills: Bill[],
 }
 
-interface Bill {
-  $id: string,
-  $purchaseDate: Date,
+interface BillForm {
   dueDate: Date,
-  status: TypedColumn,
   title: string,
   description?: string,
   totalValue: number,
-  insallmentValue: number,
   totalInstallments: number,
+}
+
+interface Bill extends BillForm {
+  $id: string,
+  $purchaseDate: Date,
+  status: TypedColumn,
+  insallmentValue: number,
   remainingInstallments: number,  
 }

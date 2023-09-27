@@ -5,7 +5,7 @@ export const getBillsByColumn = () => {
   try {
     const data = localStorage.getItem('bills')
     const parsedData = JSON.parse(data || '')
-    oldBills = parsedData.documents
+    oldBills = parsedData.document
   } catch {
     oldBills = []
   }

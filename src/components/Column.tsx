@@ -1,6 +1,8 @@
 import { Draggable, Droppable } from "@hello-pangea/dnd"
-import Card from "./Card"
 import { PlusCircleIcon } from "@heroicons/react/24/solid"
+import { useState } from "react"
+import Card from "./Card"
+import NewBillForm from "./NewBill"
 
 interface IColumn {
   id: TypedColumn,
@@ -17,8 +19,14 @@ const idToColumnText: {
 }
 
 export default function Column({ id, bills, index }: IColumn) {
+  const [showModal, setShowModal] = useState(false)
+  const handleToggleModal = () => {
+    setShowModal(!showModal)
+  }
+
   return (
-    <Draggable draggableId={id} index={index} >
+    <>
+      <Draggable draggableId={id} index={index} >
       {(provided) => (
         <div
           {...provided.draggableProps}
@@ -31,7 +39,7 @@ export default function Column({ id, bills, index }: IColumn) {
                 {...provided.droppableProps}
                 ref={provided.innerRef}
                 className={`p-2 rounded-2xl shadow-2xl ${
-                  snapshot.isDraggingOver ? "bg-amber-600/70" : "bg-white/50"
+                  snapshot.isDraggingOver ? "bg-amber-600/50" : "bg-white/50"
                 }`}
               >
                 <h2 className="flex justify-between font-semibold text-lg p-2">
@@ -63,17 +71,23 @@ export default function Column({ id, bills, index }: IColumn) {
 
                   {provided.placeholder}
 
-                  <div className="flex items-end justify-end p-2">
-                    <button className="text-amber-800/80 hover:text-amber-800">
-                      <PlusCircleIcon className="h-10 w-10" />
-                    </button>
-                  </div>
+                  {showModal
+                    ? <NewBillForm columnId={id} hide={handleToggleModal} />
+                    : (
+                      <div className="flex items-end justify-end p-2">
+                        <button className="text-amber-800/80 hover:text-amber-800">
+                          <PlusCircleIcon className="h-10 w-10" onClick={handleToggleModal} />
+                        </button>
+                      </div>
+                    )
+                  }
                 </div>
               </div>
             )}
           </Droppable>
         </div>
       )}
-    </Draggable>
+      </Draggable>
+    </>
   )
 }
