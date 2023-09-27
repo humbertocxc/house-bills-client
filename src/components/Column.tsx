@@ -26,14 +26,9 @@ export default function Column({ id, bills, index }: IColumn) {
   }
 
   return (
-    <>
-      <Draggable draggableId={id} index={index} >
+    <Draggable draggableId={id} index={index}>
       {(provided) => (
-        <div
-          {...provided.draggableProps}
-          {...provided.dragHandleProps}
-          ref={provided.innerRef}
-        >
+        <div {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
           <Droppable droppableId={index.toString()} type="card">
             {(provided, snapshot) => (
               <div
@@ -52,11 +47,7 @@ export default function Column({ id, bills, index }: IColumn) {
 
                 <div className="space-y-2">
                   {bills.map((bill, index) => (
-                    <Draggable
-                      key={bill.$id}
-                      draggableId={bill.$id}
-                      index={index}
-                    >
+                    <Draggable key={bill.$id} draggableId={bill.$id} index={index}>
                       {(provided) => (
                         <Card
                           bill={bill}
@@ -84,7 +75,6 @@ export default function Column({ id, bills, index }: IColumn) {
           </ModalContainer>
         </div>
       )}
-      </Draggable>
-    </>
+    </Draggable>
   )
 }

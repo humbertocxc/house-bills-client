@@ -1,9 +1,14 @@
 import { useEffect, useState } from 'react'
 
+interface WindowSize {
+  width?: number,
+  height?: number,
+}
+
 function useWindowSize() {
-  const [windowSize, setWindowSize] = useState({
-    width: window.innerWidth,
-    height: window.innerHeight,
+  const [windowSize, setWindowSize] = useState<WindowSize>({
+    width: undefined,
+    height: undefined,
   })
 
   useEffect(() => {
@@ -14,15 +19,20 @@ function useWindowSize() {
       })
     }
 
-    window.addEventListener('resize', handleResize)
-
-    return () => {
-      window.removeEventListener('resize', handleResize)
+    if (typeof window !== 'undefined') {
+      window.addEventListener('resize', handleResize)
+      
+      handleResize()
+      
+      return () => {
+        window.removeEventListener('resize', handleResize)
+      }
     }
   }, [])
 
+  if(!windowSize.width) return false
   const isMobile = windowSize.width <= 768
-  return isMobile
+  return isMobile 
 }
 
 export default useWindowSize
