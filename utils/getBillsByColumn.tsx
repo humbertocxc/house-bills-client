@@ -25,7 +25,7 @@ export const getBillsByColumn = () => {
       status: bill.status,
       title: bill.title,
       totalValue: bill.totalValue,
-      insallmentValue: bill.insallmentValue,
+      installmentValue: bill.installmentValue,
       totalInstallments: bill.totalInstallments,
       remainingInstallments: bill.remainingInstallments,
       ...( bill.description && {description: bill.description})

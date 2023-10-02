@@ -21,6 +21,6 @@ interface Bill extends BillForm {
   $id: string,
   $purchaseDate: Date,
   status: TypedColumn,
-  insallmentValue: number,
+  installmentValue: number,
   remainingInstallments: number,  
 }

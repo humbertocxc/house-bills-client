@@ -4,19 +4,12 @@ import { useState } from "react"
 import Card from "./Card"
 import NewBillForm from "./NewBill"
 import ModalContainer from "./ModalContainer"
+import ColumnHeader from "./ColumnHeader"
 
 interface IColumn {
   id: TypedColumn,
   bills: Bill[],
   index: number,
-}
-
-const idToColumnText: {
-  [key in TypedColumn]: string
-} = {
-  variable: "Despesas Eventuais",
-  fixed: "Despesas Fixas",
-  paid: "Contas Pagas",
 }
 
 export default function Column({ id, bills, index }: IColumn) {
@@ -38,15 +31,7 @@ export default function Column({ id, bills, index }: IColumn) {
                   snapshot.isDraggingOver ? "bg-amber-600/50" : "bg-white/50"
                 }`}
               >
-                <h2 className="flex justify-between font-semibold text-lg p-2">
-                  {idToColumnText[id]}
-                  <div className="bg-amber-900/10 rounded-full w-fit h-fit">
-                    <span className="flex justify-center items-center text-black/50 text-xs h-6 w-6">
-                      {bills.length}
-                    </span>
-                  </div>
-                </h2>
-
+                <ColumnHeader bills={bills} name={id} />
                 <div className="space-y-2">
                   {bills.map((bill, index) => (
                     <Draggable key={bill.$id} draggableId={bill.$id} index={index}>
