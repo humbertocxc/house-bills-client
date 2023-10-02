@@ -26,7 +26,7 @@ export default function NewBillForm({ columnId, hide }: INewBill) {
       $purchaseDate: new Date("yyyy-mm-dd"),
       status: columnId,
       remainingInstallments: data.totalInstallments,
-      insallmentValue: data.totalValue / data.totalInstallments,
+      installmentValue: Number(parsedTotalValue) / data.totalInstallments,
     }
 
     createBill(newBill)
@@ -45,7 +45,7 @@ export default function NewBillForm({ columnId, hide }: INewBill) {
           <Form className="space-y-2 py-2">
             <TextField autoFocus label="Título da conta" error={errors.title} name="title" type="text" />
             <TextField label="Descrição da conta" error={errors.description} name="description" type="text" />
-            <PriceInput name="totalValue" value={String(values.totalValue)} error={errors.title} />
+            <PriceInput name="totalValue" value={String(values.totalValue)} error={errors.totalValue} />
             <DateField label="Prazo de pagamento" name="dueDate" />
             <TextField label="Número de parcelas" error={errors.totalInstallments} name="totalInstallments" type="text" />
             <button className="bg-amber-900/50 hover:bg-amber-900/70 rounded-lg p-2 w-full shadow-md" type="submit">Adicionar Conta</button>

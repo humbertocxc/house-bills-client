@@ -2,7 +2,7 @@ import { FieldAttributes, FormikErrors, Field } from "formik";
 
 interface ITextField extends FieldAttributes<any> {
   label: string,
-  error?: string | FormikErrors<Date>,
+  error?: string | FormikErrors<string>,
 }
 
 export default function TextField({ error, label, ...props }: ITextField) {
